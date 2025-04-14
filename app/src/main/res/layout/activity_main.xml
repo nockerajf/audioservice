@@ -42,26 +42,204 @@
             android:layout_marginStart="16dp" />
     </LinearLayout>
 
-    <!-- Controles de equalização -->
+    <!-- Controles de equalização na vertical -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <SeekBar
-            android:id="@+id/eqBand1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="1000" />
+        <!-- Equalizador Band 1 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <SeekBar
-            android:id="@+id/eqBand2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="1000"
-            android:layout_marginTop="8dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="+15 dB"
+                android:textSize="12sp" />
 
-        <!-- Adicione mais SeekBars conforme necessário para bandas adicionais -->
+            <SeekBar
+                android:id="@+id/eqBand1"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:max="1000"
+                android:progressTint="#FFA500"
+                android:rotation="-90" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="-15 dB"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="60 Hz" />
+        </LinearLayout>
+
+        <!-- Equalizador Band 2 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="+15 dB"
+                android:textSize="12sp" />
+
+            <SeekBar
+                android:id="@+id/eqBand2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:max="1000"
+                android:progressTint="#FFA500"
+                android:rotation="-90" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="-15 dB"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="230 Hz" />
+        </LinearLayout>
+
+        <!-- Equalizador Band 3 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="+15 dB"
+                android:textSize="12sp" />
+
+            <SeekBar
+                android:id="@+id/eqBand3"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:max="1000"
+                android:progressTint="#FFA500"
+                android:rotation="-90" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="-15 dB"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="910 Hz" />
+        </LinearLayout>
+
+        <!-- Equalizador Band 4 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="+15 dB"
+                android:textSize="12sp" />
+
+            <SeekBar
+                android:id="@+id/eqBand4"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:max="1000"
+                android:progressTint="#FFA500"
+                android:rotation="-90" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="-15 dB"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="3.6 kHz" />
+        </LinearLayout>
+
+        <!-- Equalizador Band 5 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="+15 dB"
+                android:textSize="12sp" />
+
+            <SeekBar
+                android:id="@+id/eqBand5"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:max="1000"
+                android:progressTint="#FFA500"
+                android:rotation="-90" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="-15 dB"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="14 kHz" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
