@@ -30,12 +30,12 @@ class MainActivity : AppCompatActivity() {
     // BroadcastReceiver to receive updates from the service
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
-            Log.d("MainActivity", "onReceive - Broadcast received")
+            Log.d("grupo11", "onReceive - Broadcast received")
             if (intent != null && intent.action == "UPDATE_UI") {
                 currentPosition = intent.getIntExtra("CURRENT_POSITION", 0)
                 val duration = intent.getIntExtra("DURATION", 0)
 
-                Log.d("MainActivity", "Broadcast received: Current Position = $currentPosition, Duration = $duration")
+                Log.d("grupo11", "Broadcast received: Current Position = $currentPosition, Duration = $duration")
 
                 // Update UI elements
                 if (duration > 0) {
@@ -44,12 +44,12 @@ class MainActivity : AppCompatActivity() {
                     textViewCurrentTime.text = formatMilliseconds(currentPosition)
                     textViewTotalTime.text = formatMilliseconds(duration)
 
-                    Log.d("MainActivity", "Seek bar updated: Progress = ${seekBarProgress.progress}, Max = ${seekBarProgress.max}")
+                    Log.d("grupo11", "Seek bar updated: Progress = ${seekBarProgress.progress}, Max = ${seekBarProgress.max}")
                 } else {
-                    Log.d("MainActivity", "Duration is zero, UI not updated.")
+                    Log.d("grupo11", "Duration is zero, UI not updated.")
                 }
             } else {
-                Log.d("MainActivity", "Broadcast received with no action or null intent.")
+                Log.d("grupo11", "Broadcast received with no action or null intent.")
             }
         }
     }
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d("MainActivity", "onCreate - Activity Started")
+        Log.d("grupo11", "onCreate - Activity Started")
 
         playButton = findViewById(R.id.button_play)
         pauseButton = findViewById(R.id.button_pause)
@@ -72,60 +72,66 @@ class MainActivity : AppCompatActivity() {
         // Register the broadcast receiver to get updates
         val intentFilter = IntentFilter("UPDATE_UI")
         ContextCompat.registerReceiver(this, broadcastReceiver, intentFilter, ContextCompat.RECEIVER_EXPORTED)
-        Log.d("MainActivity", "BroadcastReceiver registered.")
+        Log.d("grupo11", "BroadcastReceiver registered.")
     }
 
     private fun setupButtons() {
-        Log.d("MainActivity", "Setting up buttons")
+        Log.d("grupo11", "Setting up buttons")
         playButton.setOnClickListener {
             Toast.makeText(this, "Play clicado", Toast.LENGTH_SHORT).show()
             sendAudioServiceCommand("PLAY")
-            Log.d("MainActivity", "Play button clicked.")
+            Log.d("grupo11", "Play button clicked.")
         }
 
         pauseButton.setOnClickListener {
             Toast.makeText(this, "Pause clicado", Toast.LENGTH_SHORT).show()
             sendAudioServiceCommand("PAUSE")
-            Log.d("MainActivity", "Pause button clicked.")
+            Log.d("grupo11", "Pause button clicked.")
         }
 
         stopButton.setOnClickListener {
-            Toast.makeText(this, "Stop clicado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "AudioService, Stop clicado", Toast.LENGTH_SHORT).show()
             sendAudioServiceCommand("STOP")
-            Log.d("MainActivity", "Stop button clicked.")
+            Log.d("grupo11", "Stop button clicked.")
+            val intent = Intent(this@MainActivity, AudioService::class.java)
+            intent.action = "SEEK"
+            intent.putExtra("SEEK_POSITION", 0)
+            startService(intent)
+            Log.d("grupo11", "User changed seek bar position to: $0")
+            seekBarProgress.progress =0
         }
     }
 
     private fun sendAudioServiceCommand(action: String) {
-        Log.d("MainActivity", "sendAudioServiceCommand - Action: $action")
+        Log.d("grupo11", "sendAudioServiceCommand - Action: $action")
         val intent = Intent(this, AudioService::class.java)
         intent.action = action
         startService(intent)
-        Log.d("MainActivity", "Sent command to AudioService: $action")
+        Log.d("grupo11", "Sent command to AudioService: $action")
     }
 
     private fun setupSeekBar() {
-        Log.d("MainActivity", "Setting up SeekBar")
+        Log.d("grupo11", "Setting up SeekBar")
         seekBarProgress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                Log.d("MainActivity", "SeekBar onProgressChanged - Progress: $progress, FromUser: $fromUser")
+                Log.d("grupo11", "SeekBar onProgressChanged - Progress: $progress, FromUser: $fromUser")
                 if (fromUser) {
                     currentPosition = progress
                     val intent = Intent(this@MainActivity, AudioService::class.java)
                     intent.action = "SEEK"
                     intent.putExtra("SEEK_POSITION", progress)
                     startService(intent)
-                    Log.d("MainActivity", "User changed seek bar position to: $progress")
+                    Log.d("grupo11", "User changed seek bar position to: $progress")
                 }
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                Log.d("MainActivity", "SeekBar onStartTrackingTouch")
+                Log.d("grupo11", "SeekBar onStartTrackingTouch")
                 handler.removeCallbacksAndMessages(null)
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                Log.d("MainActivity", "SeekBar onStopTrackingTouch")
+                Log.d("grupo11", "SeekBar onStopTrackingTouch")
                 updateSeekBarProgress()
             }
         })
@@ -133,18 +139,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateSeekBarProgress() {
-        Log.d("MainActivity", "updateSeekBarProgress - Updating progress")
+        Log.d("grupo11", "updateSeekBarProgress - Updating progress")
         handler.postDelayed(object : Runnable {
             override fun run() {
                 seekBarProgress.progress = currentPosition
-                Log.d("MainActivity", "Seek bar progress updated: Current Progress = $currentPosition")
+                Log.d("grupo11", "Seek bar progress updated: Current Progress = $currentPosition")
                 handler.postDelayed(this, 1000)
             }
         }, 1000)
     }
 
     private fun formatMilliseconds(milliseconds: Int): String {
-        Log.d("MainActivity", "Formatting milliseconds: $milliseconds")
+        Log.d("grupo11", "Formatting milliseconds: $milliseconds")
         val minutes = (milliseconds / 1000) / 60
         val seconds = (milliseconds / 1000) % 60
         return String.format("%d:%02d", minutes, seconds)
@@ -153,6 +159,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         LocalBroadcastManager.getInstance(this).unregisterReceiver(broadcastReceiver)
-        Log.d("MainActivity", "BroadcastReceiver unregistered. Activity destroyed.")
+        Log.d("grupo11", "BroadcastReceiver unregistered. Activity destroyed.")
     }
 }
