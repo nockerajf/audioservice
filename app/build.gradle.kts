@@ -46,5 +46,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("androidx.core:core:1.1.0")
-    implementation("androidx.media:media:1.1.0")
+    implementation("androidx.media:media:1.6.0")
+    implementation("androidx.emoji2:emoji2:1.0.0")
+
 }
